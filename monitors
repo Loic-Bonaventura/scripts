@@ -1,0 +1,13 @@
+#/!bin/sh
+
+mon=$(xrandr)
+actual_mon=$(echo "$mon" | rg -e " connected" | awk ' { print $1 } ' | tr -d '[:space:]')
+echo "$actual_mon"
+if [ "$actual_mon" = "eDP-1" ]; then
+    xrandr --output eDP-1 --auto --scale 0.5 --brightness 1
+    nitrogen --set-zoom-fill "$WALLPAPER"
+else
+    xrandr --output eDP-1 --off --output DP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --mode 1920x1080 --pos 1920x0 --rotate normal
+    nitrogen --set-auto --head=0 "$WALLPAPER"
+    nitrogen --set-auto --head=1 "$WALLPAPER"
+fi

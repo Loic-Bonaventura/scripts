@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# This script aims at quickly opening config files in $VISUAL using dmenu.
+
+configs="emacs\npicom\nzshrc\n"
+
+to_edit=$(echo -e "$configs" | dmenu)
+
+case "$to_edit" in
+    "emacs")
+        $VISUAL "/home/$USER/.doom.d/config.org"
+        ;;
+
+    "picom")
+        $VISUAL "/home/$USER/.config/picom.conf"
+        ;;
+esac
